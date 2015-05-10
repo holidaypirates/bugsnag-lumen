@@ -1,4 +1,4 @@
-<?php namespace HolidayPirates\BugsnagLaravel;
+<?php namespace HolidayPirates\BugsnagLumen;
 
 use Illuminate\Support\ServiceProvider;
 
