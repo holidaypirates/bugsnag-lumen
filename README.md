@@ -22,6 +22,12 @@ How to Install
 
 2.  Update `bootstrap/app.php` to activate Bugsnag
 
+
+    ```php
+    # Copy config/bugsnag.php from package to project config, change vaules and register config file in `bootstrap/app.php`
+    $app->configure('bugsnag');
+    ```
+
     ```php
     # Add `BugsnagLumenServiceProvider` to the `bootstrap/app.php`
     $app->register('HolidayPirates\BugsnagLumen\BugsnagLumenServiceProvider')

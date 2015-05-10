@@ -19,11 +19,12 @@ class BugsnagLumenServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('bugsnag', function ($app) {
-            $config = $app['config']['bugsnag'] ?: $app['config']['bugsnag::config'];
+            
+            $config = $app['config']['bugsnag'];
 
             $client = new \Bugsnag_Client($config['api_key']);
             $client->setStripPath(base_path());
-            $client->setProjectRoot(app_path());
+            $client->setProjectRoot(base_path('app'));
             $client->setAutoNotify(false);
             $client->setBatchSending(false);
             $client->setReleaseStage($app->environment());
