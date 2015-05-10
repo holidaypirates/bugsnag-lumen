@@ -25,6 +25,7 @@ How to Install
     ```php
     # Add `BugsnagLumenServiceProvider` to the `bootstrap/app.php`
     $app->register('HolidayPirates\BugsnagLumen\BugsnagLumenServiceProvider')
+    ```
 
 3. Use the Bugsnag exception handler from `App/Exceptions/Handler.php`.
 
