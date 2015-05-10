@@ -1,0 +1,11 @@
+{
+  "providers": [
+    "Bugsnag\BugsnagLumenl\BugsnagLumenlServiceProvider"
+  ],
+  "aliases": [
+    {
+      "alias": "Bugsnag",
+      "facade": "Bugsnag\BugsnagLumenl\BugsnagFacade"
+    }
+  ]
+}
