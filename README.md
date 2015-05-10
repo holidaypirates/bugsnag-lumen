@@ -14,27 +14,17 @@ capturing errors from your applications.
 How to Install
 --------------
 
-1.  Install the `bugsnag/bugsnag-lumen` package
+1.  Install the `holidaypirates/bugsnag-lumen` package
 
     ```shell
-    $ composer require "bugsnag/bugsnag-lumen:1.*"
+    $ composer require "holidaypirates/bugsnag-lumen:1.*"
     ```
 
-2.  Update `config/app.php` (or `app/config/app.php` for Laravel 4) to activate Bugsnag
+2.  Update `bootstrap/app.php` to activate Bugsnag
 
     ```php
     # Add `BugsnagLumenServiceProvider` to the `bootstrap/app.php`
-    'providers' => array(
-        ...
-        'Bugsnag\BugsnagLumen\BugsnagLumenServiceProvider',
-    )
-
-    # Add the `BugsnagFacade` to the `aliases` array
-    'aliases' => array(
-        ...
-        'Bugsnag' => 'Bugsnag\BugsnagLumen\BugsnagFacade',
-    )
-    ```
+    $app->register('HolidayPirates\BugsnagLumen\BugsnagLumenServiceProvider')
 
 3. Use the Bugsnag exception handler from `App/Exceptions/Handler.php`.
 
@@ -45,7 +35,7 @@ How to Install
 
     ```php
     # ADD this line instead
-    use Bugsnag\BugsnagLumen\BugsnagExceptionHandler as ExceptionHandler
+    use HolidayPirates\BugsnagLumen\BugsnagExceptionHandler as ExceptionHandler
     ```
 
     After this change, your file should look like this:
@@ -54,7 +44,7 @@ How to Install
     <?php namespace App\Exceptions;
 
     use Exception;
-    use Bugsnag\BugsnagLumen\BugsnagExceptionHandler as ExceptionHandler;
+    use HolidayPirates\BugsnagLumen\BugsnagExceptionHandler as ExceptionHandler;
 
     class Handler extends ExceptionHandler {
         ...
@@ -98,7 +88,7 @@ To send custom data, you should define a *before-notify* function,
 adding an array of "tabs" of custom data to the $metaData parameter. For example:
 
 ```php
-Bugsnag::setBeforeNotifyFunction("before_bugsnag_notify");
+app('bugsnag')->setBeforeNotifyFunction("before_bugsnag_notify");
 
 function before_bugsnag_notify($error) {
     // Do any custom error handling here
@@ -121,16 +111,16 @@ Sending Custom Errors or Non-Fatal Exceptions
 ---------------------------------------------
 
 You can easily tell Bugsnag about non-fatal or caught exceptions by 
-calling `Bugsnag::notifyException`:
+calling `app('bugsnag')->notifyException`:
 
 ```php
-Bugsnag::notifyException(new Exception("Something bad happened"));
+app('bugsnag')->notifyException(new Exception("Something bad happened"));
 ```
 
 You can also send custom errors to Bugsnag with `Bugsnag::notifyError`:
 
 ```php
-Bugsnag::notifyError("ErrorType", "Something bad happened here too");
+app('bugsnag')->notifyError("ErrorType", "Something bad happened here too");
 ```
 
 Both of these functions can also be passed an optional `$metaData` parameter,
@@ -156,7 +146,7 @@ If you'd like to send different levels of errors to Bugsnag, you can call
 `setErrorReportingLevel`, for example:
 
 ```php
-Bugsnag::setErrorReportingLevel(E_ALL & ~E_NOTICE);
+app('bugsnag')->setErrorReportingLevel(E_ALL & ~E_NOTICE);
 ```
 
 
@@ -168,7 +158,7 @@ is available as `Bugsnag`, which allows you to set various
 configuration options, for example:
 
 ```php
-Bugsnag::setReleaseStage("production");
+app('bugsnag')->setReleaseStage("production");
 ```
 
 See the [Bugsnag Notifier for PHP documentation](https://bugsnag.com/docs/notifiers/php#additional-configuration)
@@ -181,21 +171,4 @@ Reporting Bugs or Feature Requests
 Please report any bugs or feature requests on the github issues page for this
 project here:
 
-<https://github.com/bugsnag/bugsnag-laravel/issues>
-
-
-Contributing
-------------
-
--   [Fork](https://help.github.com/articles/fork-a-repo) the [notifier on github](https://github.com/bugsnag/bugsnag-laravel)
--   Commit and push until you are happy with your contribution
--   Run the tests to make sure they all pass: `composer install && ./vendor/bin/phpunit`
--   [Make a pull request](https://help.github.com/articles/using-pull-requests)
--   Thanks!
-
-
-License
--------
-
-The Bugsnag Laravel notifier is free software released under the MIT License. 
-See [LICENSE.txt](https://github.com/bugsnag/bugsnag-laravel/blob/master/LICENSE.txt) for details.
+<https://github.com/holidaypirates/bugsnag-lumen/issues>
