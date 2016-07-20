@@ -1,5 +1,7 @@
 <?php namespace HolidayPirates\BugsnagLumen;
 
+use Bugsnag\Client;
+use Bugsnag\Configuration;
 use Illuminate\Support\ServiceProvider;
 
 class BugsnagLumenServiceProvider extends ServiceProvider
@@ -22,10 +24,10 @@ class BugsnagLumenServiceProvider extends ServiceProvider
             
             $config = $app['config']['bugsnag'];
 
-            $client = new \Bugsnag_Client($config['api_key']);
+            $bugsnagConfig = new Configuration($config['api_key']);
+            $client = new Client($bugsnagConfig);
             $client->setStripPath(base_path());
             $client->setProjectRoot(base_path('app'));
-            $client->setAutoNotify(false);
             $client->setBatchSending(false);
             $client->setReleaseStage($app->environment());
             $client->setNotifier(array(
