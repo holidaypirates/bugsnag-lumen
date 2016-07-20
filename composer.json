@@ -17,7 +17,7 @@
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "5.*",
-        "bugsnag/bugsnag": ">=2.5.0"
+        "bugsnag/bugsnag": "~3"
     },
     "autoload": {
         "psr-4": {
